@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "7ecmXpuH1dMG7pl4QWqeG/dCtDuP9FOtGZJ+ApAlvmk=",
+  "Source": "serverside_project_api",
+  "BasePath": "_content/serverside_project_api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
