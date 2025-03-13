@@ -1,0 +1,4 @@
+Text Editor: Quill
+@install - npm install quill
+@use - <Editor/> component in React or new Quill in regular JavaScript
+ 
