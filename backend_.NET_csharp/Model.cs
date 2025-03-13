@@ -2,11 +2,12 @@
 
 namespace bookslibrary
 {
-    public class BookContext : DbContext
+    public class LibraryContext : DbContext
     {
         public DbSet<Book> Books { get; set; }
+        public DbSet<Genre> Genres { get; set; }
         public string DbPath { get; }
-        public BookContext()
+        public LibraryContext()
         {
             DbPath = "db/books.db";
         }
@@ -21,5 +22,12 @@ namespace bookslibrary
         public string? Title { get; set; }
         public string? Description { get; set; }
         public int? GenreID { get; set; }
+    }
+
+    public class Genre
+    {
+        public int ID { get; set; }
+        public string? Name { get; set; }
+        public string? Color { get; set; }
     }
 }

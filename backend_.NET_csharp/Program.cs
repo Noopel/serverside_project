@@ -11,7 +11,7 @@ app.UseCors(x => x
 .AllowCredentials()
 );
 
-await using var db = new BookContext();
+await using var db = new LibraryContext();
 Console.WriteLine($"Database path: {db.DbPath}");
 
 app.MapGet("/", () => 
@@ -58,7 +58,7 @@ app.MapPut("/books/{id}", async (int id, Book inputBook) =>
     return Results.NoContent();
 });
 
-app.MapDelete("books/{id}", async (int id) =>
+app.MapDelete("/books/{id}", async (int id) =>
 {
     var book = await db.Books.FindAsync(id);
 
@@ -70,4 +70,33 @@ app.MapDelete("books/{id}", async (int id) =>
     return Results.NoContent();
 });
 
+app.MapGet("/genres", async () =>
+{
+    var genres = await db.Genres.ToListAsync();
+
+    return Results.Ok(genres);
+});
+
+app.MapGet("/genres/books/{id}", async (int id) =>
+{
+    var genre = await db.Genres.Where((genre) => genre.ID == id).SingleAsync();
+    var books = await db.Books.Where((book) => book.GenreID == id).ToListAsync();
+
+    GenreAndBooks genreAndBooks = new GenreAndBooks(genre, books);
+
+    return Results.Ok(genreAndBooks);
+});
+
+
 app.Run();
+
+public class GenreAndBooks
+{
+    public Genre genre { get; set; }
+    public List<Book> books { get; set; }
+
+    public GenreAndBooks (Genre providedGenre, List<Book> providedBooks) {
+        genre = providedGenre;
+        books = providedBooks;
+ }
+}
